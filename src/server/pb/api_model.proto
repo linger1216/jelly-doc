@@ -1,0 +1,89 @@
+// In general, while you can use proto2 (the current default protocol buffers
+// version), we recommend that you use proto3 with gRPC as it lets you use the
+// full range of gRPC-supported languages, as well as avoiding compatibility
+// issues with proto2 clients talking to proto3 servers and vice versa.
+syntax = "proto3";
+
+// The package name determines the name of the directories that truss creates
+// for `package Api;` truss will create the directory "Api-service".
+package pb;
+
+import "common.proto";
+
+// 环境变量设计
+
+
+
+// one of
+message BasicAuth {
+  string user = 1;
+  string password = 2;
+}
+
+message JwtAuth {
+  string user = 1;
+  string password = 2;
+}
+
+message OAuth1 {}
+message OAuth2 {}
+
+
+
+
+
+message ApiModel {
+  string id = 1;
+  string name = 2; // 名称
+  string description = 3; // 描述
+
+  string user_id = 4; // 负责人
+
+  // 语法{xxx} 在前端自动替换值到后端
+  string url = 13;
+  map<string, string> headers = 14;
+  map<string, string> url_params = 15;
+  // 不定义file等二进制类型了
+  string body = 16;
+
+  oneof auth {
+    BasicAuth basic_auth = 17; //详细设备对象信息
+    JwtAuth jwt_auth = 18; //详细设备对象信息
+    OAuth1 oauth1 = 19; //详细设备对象信息
+    OAuth2 oauth2 = 20; //详细设备对象信息
+  }
+
+  // UI 所在目录
+  repeated string directories = 30;
+}
+
+message CreateApiRequest {
+  repeated ApiModel apis = 1;
+}
+
+message GetApiRequest {
+  repeated string ids = 1;
+}
+
+message GetApiResponse {
+  repeated ApiModel Apis = 1;
+}
+
+message ListApiRequest {
+  int32 header = 1;
+  int32 current_page = 9;
+  int32 page_size = 10;
+}
+
+message ListApiResponse {
+  repeated KV headers = 1;
+  repeated ApiModel Apis = 2;
+}
+
+message UpdateApiRequest {
+  ApiModel Api = 1;
+}
+
+message DeleteApiRequest {
+  repeated string ids = 1;
+}

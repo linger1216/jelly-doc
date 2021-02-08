@@ -1,4 +1,4 @@
-SERVICE_NAME = echo
+SERVICE_NAME = api
 SERVER_PREFIX = src/server
 
 run:
