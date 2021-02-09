@@ -1,0 +1,59 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+
+message MemberModel {
+  string id = 1;
+  string name = 2; // 名称
+  string description = 3; // 描述
+  string email = 4;
+  string avatar = 5;
+
+
+  // auth
+  string user_name = 11;
+  string password = 12;
+  string salt = 13;
+
+  // permission
+  string role = 21; // 用于权限, 预留字段
+
+  // 3rd accounts
+  string wechat = 31;
+  string weibo = 32;
+  string qq = 33;
+
+}
+
+message CreateMemberRequest {
+  repeated MemberModel apis = 1;
+}
+
+message GetMemberRequest {
+  repeated string ids = 1;
+}
+
+message GetMemberResponse {
+  repeated MemberModel Members = 1;
+}
+
+message ListMemberRequest {
+  int32 header = 1;
+  int32 current_page = 9;
+  int32 page_size = 10;
+}
+
+message ListMemberResponse {
+  repeated KV headers = 1;
+  repeated MemberModel Members = 2;
+}
+
+message UpdateMemberRequest {
+  MemberModel Member = 1;
+}
+
+message DeleteMemberRequest {
+  repeated string ids = 1;
+}

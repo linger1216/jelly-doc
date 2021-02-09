@@ -1,0 +1,53 @@
+// In general, while you can use proto2 (the current default protocol buffers
+// version), we recommend that you use proto3 with gRPC as it lets you use the
+// full range of gRPC-supported languages, as well as avoiding compatibility
+// issues with proto2 clients talking to proto3 servers and vice versa.
+syntax = "proto3";
+
+// The package name determines the name of the directories that truss creates
+// for `package api;` truss will create the directory "api-service".
+package pb;
+
+
+import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
+import "common.proto";
+import "member_model.proto";
+
+
+service Member {
+  rpc create (CreateMemberRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      post: "/jd/v1/member"
+      body: "*"
+    };
+  }
+
+  rpc get (GetMemberRequest) returns (GetMemberResponse) {
+    option (google.api.http) = {
+      get: "/jd/v1/member/{ids}"
+    };
+  }
+
+  rpc list (ListMemberRequest) returns (ListMemberResponse) {
+    option (google.api.http) = {
+      get: "/jd/v1/member"
+      additional_bindings {
+        custom: {
+          kind:"HEAD"
+          path:"/jd/v1/member"
+        }
+      }};
+  }
+
+  rpc update (UpdateMemberRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      put: "/jd/v1/member"
+    };
+  }
+
+  rpc delete (DeleteMemberRequest) returns (EmptyResponse) {
+    option (google.api.http) = {
+      delete: "/jd/v1/member/{ids}"
+    };
+  }
+}
