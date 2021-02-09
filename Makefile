@@ -19,7 +19,7 @@ member:
 
 all:
 	cd $(SERVER_PREFIX)/pb && truss -v common.proto member_model.proto member_service.proto --svcout ../
-	cd $(SERVER_PREFIX)/pb && truss -v common.proto member_model.proto member_service.proto --svcout ../
+	cd $(SERVER_PREFIX)/pb && truss -v common.proto api_model.proto api_service.proto --svcout ../
 
 
 model:

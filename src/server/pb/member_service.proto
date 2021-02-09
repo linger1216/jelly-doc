@@ -15,7 +15,7 @@ import "member_model.proto";
 
 
 service Member {
-  rpc create (CreateMemberRequest) returns (EmptyResponse) {
+  rpc create (CreateMemberRequest) returns (CreateMemberResponse) {
     option (google.api.http) = {
       post: "/jd/v1/member"
       body: "*"

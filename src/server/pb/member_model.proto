@@ -31,6 +31,10 @@ message CreateMemberRequest {
   repeated MemberModel apis = 1;
 }
 
+message CreateMemberResponse {
+  repeated string ids = 1;
+}
+
 message GetMemberRequest {
   repeated string ids = 1;
 }
@@ -51,7 +55,7 @@ message ListMemberResponse {
 }
 
 message UpdateMemberRequest {
-  MemberModel Member = 1;
+  repeated MemberModel Members = 1;
 }
 
 message DeleteMemberRequest {

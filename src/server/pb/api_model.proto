@@ -61,6 +61,10 @@ message CreateApiRequest {
   repeated ApiModel apis = 1;
 }
 
+message CreateApiResponse {
+  repeated string ids = 1;
+}
+
 message GetApiRequest {
   repeated string ids = 1;
 }
@@ -81,7 +85,7 @@ message ListApiResponse {
 }
 
 message UpdateApiRequest {
-  ApiModel Api = 1;
+  repeated ApiModel Apis = 1;
 }
 
 message DeleteApiRequest {
