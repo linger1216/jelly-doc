@@ -18,13 +18,12 @@ member:
 	cd $(SERVER_PREFIX)/pb && truss -v common.proto member_model.proto member_service.proto --svcout ../
 
 all:
-	cd $(SERVER_PREFIX)/pb && truss -v common.proto member_model.proto member_service.proto --svcout ../
-	cd $(SERVER_PREFIX)/pb && truss -v common.proto api_model.proto api_service.proto --svcout ../
-
+	cd $(SERVER_PREFIX)/pb && truss -v common.proto *_model.proto
+	cd $(SERVER_PREFIX)/pb && truss -v member_model.proto member_service.proto --svcout ../
+	cd $(SERVER_PREFIX)/pb && truss -v api_model.proto api_service.proto --svcout ../
 
 model:
-	cd $(SERVER_PREFIX)/pb && truss -v common.proto
-	cd $(SERVER_PREFIX)/pb && truss -v *_model.proto
+	cd $(SERVER_PREFIX)/pb && truss -v common.proto *_model.proto
 
 clean:
 	rm -fr $(SERVER_PREFIX)/*-service

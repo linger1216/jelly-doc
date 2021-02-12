@@ -1,0 +1,25 @@
+// In general, while you can use proto2 (the current default protocol buffers
+// version), we recommend that you use proto3 with gRPC as it lets you use the
+// full range of gRPC-supported languages, as well as avoiding compatibility
+// issues with proto2 clients talking to proto3 servers and vice versa.
+syntax = "proto3";
+
+// The package name determines the name of the directories that truss creates
+// for `package Api;` truss will create the directory "Api-service".
+package pb;
+
+
+
+message Permission {
+  string api_id = 1;
+  enum OperatorType
+  {
+    READ_ONLY = 0;
+    WRITE = 1;
+  }
+  OperatorType operator = 2;
+}
+
+message Permissions {
+  repeated Permission permissions = 1;
+}
