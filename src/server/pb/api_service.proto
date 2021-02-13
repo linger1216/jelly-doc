@@ -14,7 +14,7 @@ import "common.proto";
 import "api_model.proto";
 
 
-service Api {
+service BasisApi {
   rpc create (CreateApiRequest) returns (CreateApiResponse) {
     option (google.api.http) = {
       post: "/jd/v1/api"

@@ -6,9 +6,14 @@ syntax = "proto3";
 
 // The package name determines the name of the directories that truss creates
 // for `package Api;` truss will create the directory "Api-service".
+
+// role 预定义好的几个角色
+// 本质上每个role 对应的都是 不同的 directories, 以及 r/w
+//
+
+
+
 package pb;
-
-
 
 message Permission {
   string api_id = 1;

@@ -10,8 +10,8 @@ import (
 	"google.golang.org/grpc"
 
 	// This Service
-	"github.com/linger1216/jelly-doc/src/server/api-service/handlers"
-	"github.com/linger1216/jelly-doc/src/server/api-service/svc"
+	"github.com/linger1216/jelly-doc/src/server/basis-api-service/handlers"
+	"github.com/linger1216/jelly-doc/src/server/basis-api-service/svc"
 	pb "github.com/linger1216/jelly-doc/src/server/pb"
 )
 
@@ -22,7 +22,7 @@ type Config struct {
 	GRPCAddr  string
 }
 
-func NewEndpoints(service pb.ApiServer) svc.Endpoints {
+func NewEndpoints(service pb.BasisApiServer) svc.Endpoints {
 	// Business domain.
 
 	// Wrap Service with middlewares. See handlers/middlewares.go
@@ -102,7 +102,7 @@ func Run(reader config.Reader) {
 
 		srv := svc.MakeGRPCServer(endpoints)
 		s := grpc.NewServer()
-		pb.RegisterApiServer(s, srv)
+		pb.RegisterBasisApiServer(s, srv)
 
 		interrupt <- s.Serve(ln)
 	}()

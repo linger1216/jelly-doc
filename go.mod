@@ -10,4 +10,5 @@ require (
 	github.com/metaverse/truss v0.2.1
 	github.com/pkg/errors v0.9.1
 	google.golang.org/grpc v1.29.1
+	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )

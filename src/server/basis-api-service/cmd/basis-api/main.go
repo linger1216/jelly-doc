@@ -8,7 +8,7 @@ import (
 	"os"
 
 	// This Service
-	"github.com/linger1216/jelly-doc/src/server/api-service/svc/server"
+	"github.com/linger1216/jelly-doc/src/server/basis-api-service/svc/server"
 )
 
 var (

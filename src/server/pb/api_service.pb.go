@@ -31,29 +31,30 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 func init() { proto.RegisterFile("api_service.proto", fileDescriptor_dac1f622be3e5824) }
 
 var fileDescriptor_dac1f622be3e5824 = []byte{
-	// 351 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0xd1, 0xbf, 0x4b, 0x23, 0x41,
-	0x14, 0x07, 0xf0, 0x6c, 0x12, 0xb6, 0x18, 0x02, 0xb9, 0xcc, 0x25, 0x10, 0xb6, 0xd8, 0x22, 0xd5,
-	0x91, 0x62, 0x87, 0xbb, 0xeb, 0xae, 0x4b, 0x2e, 0xab, 0x82, 0xa9, 0x04, 0x0b, 0x6d, 0x64, 0x7f,
-	0x3c, 0x37, 0x23, 0xbb, 0x3b, 0xe3, 0xcc, 0xdb, 0x40, 0x10, 0x1b, 0x4b, 0x2b, 0xc1, 0x7f, 0xca,
-	0x32, 0x60, 0x63, 0x29, 0x89, 0x7f, 0x88, 0x64, 0xb2, 0xc6, 0x55, 0xc1, 0xee, 0xed, 0x17, 0xde,
-	0x67, 0xdf, 0x97, 0x21, 0x9d, 0x40, 0xf2, 0x33, 0x0d, 0x6a, 0xce, 0x23, 0xf0, 0xa4, 0x12, 0x28,
-	0x68, 0x5d, 0x86, 0x8e, 0x9f, 0x70, 0x9c, 0x15, 0xa1, 0x17, 0x89, 0x8c, 0x65, 0x80, 0xc1, 0x1c,
-	0x94, 0x06, 0x86, 0xaa, 0xd0, 0x9a, 0xc5, 0x70, 0x8e, 0x0a, 0x80, 0x25, 0x42, 0x24, 0x29, 0xe0,
-	0x8c, 0xab, 0x58, 0x06, 0x0a, 0x17, 0x2c, 0xc8, 0x73, 0x81, 0x01, 0x72, 0x91, 0xeb, 0x2d, 0xe5,
-	0xb4, 0x22, 0x91, 0x65, 0x22, 0x2f, 0xbf, 0xda, 0x9b, 0x7f, 0x65, 0x22, 0x86, 0x74, 0x1b, 0xfc,
-	0xb9, 0x6d, 0x90, 0xc6, 0x48, 0x72, 0x3a, 0x25, 0x76, 0xa4, 0x20, 0x40, 0xa0, 0x5d, 0x4f, 0x86,
-	0xde, 0x7f, 0x33, 0x8f, 0x24, 0x3f, 0x82, 0xcb, 0x02, 0x34, 0x3a, 0xbd, 0x4f, 0xa9, 0x96, 0x22,
-	0xd7, 0x30, 0xe8, 0xdd, 0x3c, 0xbe, 0xdc, 0xd7, 0xdb, 0x03, 0xc2, 0x2e, 0x62, 0x36, 0xff, 0xcd,
-	0x02, 0xc9, 0xff, 0x59, 0x43, 0xba, 0x47, 0x1a, 0x09, 0x20, 0xed, 0x6c, 0x96, 0xf6, 0x01, 0x2b,
-	0x0e, 0xad, 0x46, 0x25, 0xd2, 0x37, 0x08, 0xa5, 0x3f, 0xde, 0x11, 0x76, 0xc5, 0x63, 0x7d, 0x4d,
-	0x4f, 0x48, 0x33, 0xe5, 0x1a, 0xa9, 0xd9, 0x9a, 0x72, 0x5d, 0x95, 0x7e, 0x7e, 0xc8, 0x4a, 0xea,
-	0x97, 0xa1, 0x06, 0xb4, 0x72, 0xcf, 0x69, 0x77, 0x4c, 0x49, 0xf3, 0xc0, 0x1f, 0x4d, 0xaa, 0x29,
-	0xf5, 0x89, 0x5d, 0xc8, 0x78, 0x57, 0xf8, 0xd8, 0xcc, 0x15, 0xde, 0xdc, 0xee, 0x67, 0x12, 0x17,
-	0x3b, 0x9c, 0x1a, 0xbc, 0xe5, 0x54, 0x99, 0x43, 0x62, 0xc7, 0x90, 0xc2, 0x1b, 0x33, 0x31, 0xf3,
-	0xf7, 0x4c, 0x59, 0x77, 0xf8, 0xa5, 0xee, 0xb8, 0xff, 0xb0, 0x72, 0xad, 0xe5, 0xca, 0xb5, 0x9e,
-	0x57, 0xae, 0x75, 0xb7, 0x76, 0x6b, 0xcb, 0xb5, 0x5b, 0x7b, 0x5a, 0xbb, 0xb5, 0xd0, 0x36, 0xaf,
-	0xf5, 0xf7, 0x35, 0x00, 0x00, 0xff, 0xff, 0xa4, 0x62, 0xb5, 0xdf, 0x2c, 0x02, 0x00, 0x00,
+	// 353 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0xd1, 0x31, 0x4b, 0xf3, 0x40,
+	0x18, 0x07, 0xf0, 0xa6, 0x2d, 0xe1, 0xe5, 0x28, 0xf4, 0xed, 0xd9, 0x42, 0xc9, 0x90, 0xa1, 0x93,
+	0x74, 0xc8, 0xa1, 0x6e, 0x6e, 0xad, 0x8d, 0x0a, 0x76, 0x12, 0x1c, 0x74, 0x91, 0x4b, 0xf2, 0x98,
+	0x9e, 0x24, 0xb9, 0xf3, 0xee, 0x52, 0x28, 0xe2, 0xe2, 0x17, 0x50, 0xf0, 0x4b, 0x39, 0x16, 0x5c,
+	0x1c, 0xa5, 0xf5, 0x83, 0x48, 0xaf, 0xb1, 0x46, 0x05, 0xb7, 0x27, 0x7f, 0x78, 0x7e, 0x79, 0xfe,
+	0x1c, 0x6a, 0x51, 0xc1, 0x2e, 0x15, 0xc8, 0x29, 0x0b, 0xc1, 0x13, 0x92, 0x6b, 0x8e, 0xab, 0x22,
+	0x70, 0xfc, 0x98, 0xe9, 0x49, 0x1e, 0x78, 0x21, 0x4f, 0x49, 0x0a, 0x9a, 0x4e, 0x41, 0x2a, 0x20,
+	0x5a, 0xe6, 0x4a, 0x91, 0x08, 0xae, 0xb4, 0x04, 0x20, 0x31, 0xe7, 0x71, 0x02, 0x7a, 0xc2, 0x64,
+	0x24, 0xa8, 0xd4, 0x33, 0x42, 0xb3, 0x8c, 0x6b, 0xaa, 0x19, 0xcf, 0xd4, 0x9a, 0x72, 0x1a, 0x21,
+	0x4f, 0x53, 0x9e, 0x15, 0x5f, 0xcd, 0xd5, 0xbf, 0x52, 0x1e, 0x41, 0xb2, 0x0e, 0x76, 0x1f, 0x6a,
+	0xe8, 0xdf, 0x90, 0x2a, 0xa6, 0x06, 0x82, 0xe1, 0x31, 0xb2, 0x43, 0x09, 0x54, 0x03, 0x6e, 0x7b,
+	0x22, 0xf0, 0x0e, 0xcc, 0x3c, 0x10, 0xec, 0x14, 0x6e, 0x72, 0x50, 0xda, 0xe9, 0xfc, 0x48, 0x95,
+	0xe0, 0x99, 0x82, 0x5e, 0xe7, 0xfe, 0xe5, 0xfd, 0xa9, 0xda, 0xec, 0x21, 0x72, 0x1d, 0x91, 0xe9,
+	0x0e, 0xa1, 0x82, 0xed, 0x5b, 0x7d, 0x7c, 0x88, 0x6a, 0x31, 0x68, 0xdc, 0x5a, 0x2d, 0x1d, 0x81,
+	0x2e, 0x39, 0xb8, 0x1c, 0x15, 0x48, 0xd7, 0x20, 0x18, 0xff, 0xff, 0x42, 0xc8, 0x2d, 0x8b, 0xd4,
+	0x1d, 0x3e, 0x47, 0xf5, 0x84, 0x29, 0x8d, 0xcd, 0xd6, 0x98, 0xa9, 0xb2, 0xb4, 0xf5, 0x2d, 0x2b,
+	0xa8, 0x6d, 0x43, 0xf5, 0x70, 0xe9, 0x9e, 0x8b, 0xf6, 0x10, 0xa3, 0xfa, 0xb1, 0x3f, 0x18, 0x95,
+	0x53, 0xec, 0x23, 0x3b, 0x17, 0xd1, 0xa6, 0xf0, 0x99, 0x99, 0x4b, 0xbc, 0xb9, 0xdd, 0x4f, 0x85,
+	0x9e, 0x6d, 0x70, 0x6c, 0xf0, 0x86, 0x53, 0x66, 0x4e, 0x90, 0x1d, 0x41, 0x02, 0x9f, 0xcc, 0xc8,
+	0xcc, 0x7f, 0x33, 0x45, 0xdd, 0xfe, 0xaf, 0xba, 0xc3, 0xee, 0xf3, 0xc2, 0xb5, 0xe6, 0x0b, 0xd7,
+	0x7a, 0x5b, 0xb8, 0xd6, 0xe3, 0xd2, 0xad, 0xcc, 0x97, 0x6e, 0xe5, 0x75, 0xe9, 0x56, 0x02, 0xdb,
+	0x3c, 0xd9, 0xde, 0x47, 0x00, 0x00, 0x00, 0xff, 0xff, 0xf9, 0xa8, 0x2e, 0x3a, 0x31, 0x02, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -64,10 +65,10 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// ApiClient is the client API for Api service.
+// BasisApiClient is the client API for BasisApi service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ApiClient interface {
+type BasisApiClient interface {
 	Create(ctx context.Context, in *CreateApiRequest, opts ...grpc.CallOption) (*CreateApiResponse, error)
 	Get(ctx context.Context, in *GetApiRequest, opts ...grpc.CallOption) (*GetApiResponse, error)
 	List(ctx context.Context, in *ListApiRequest, opts ...grpc.CallOption) (*ListApiResponse, error)
@@ -75,61 +76,61 @@ type ApiClient interface {
 	Delete(ctx context.Context, in *DeleteApiRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
 }
 
-type apiClient struct {
+type basisApiClient struct {
 	cc *grpc.ClientConn
 }
 
-func NewApiClient(cc *grpc.ClientConn) ApiClient {
-	return &apiClient{cc}
+func NewBasisApiClient(cc *grpc.ClientConn) BasisApiClient {
+	return &basisApiClient{cc}
 }
 
-func (c *apiClient) Create(ctx context.Context, in *CreateApiRequest, opts ...grpc.CallOption) (*CreateApiResponse, error) {
+func (c *basisApiClient) Create(ctx context.Context, in *CreateApiRequest, opts ...grpc.CallOption) (*CreateApiResponse, error) {
 	out := new(CreateApiResponse)
-	err := c.cc.Invoke(ctx, "/pb.Api/create", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pb.BasisApi/create", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *apiClient) Get(ctx context.Context, in *GetApiRequest, opts ...grpc.CallOption) (*GetApiResponse, error) {
+func (c *basisApiClient) Get(ctx context.Context, in *GetApiRequest, opts ...grpc.CallOption) (*GetApiResponse, error) {
 	out := new(GetApiResponse)
-	err := c.cc.Invoke(ctx, "/pb.Api/get", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pb.BasisApi/get", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *apiClient) List(ctx context.Context, in *ListApiRequest, opts ...grpc.CallOption) (*ListApiResponse, error) {
+func (c *basisApiClient) List(ctx context.Context, in *ListApiRequest, opts ...grpc.CallOption) (*ListApiResponse, error) {
 	out := new(ListApiResponse)
-	err := c.cc.Invoke(ctx, "/pb.Api/list", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pb.BasisApi/list", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *apiClient) Update(ctx context.Context, in *UpdateApiRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+func (c *basisApiClient) Update(ctx context.Context, in *UpdateApiRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
 	out := new(EmptyResponse)
-	err := c.cc.Invoke(ctx, "/pb.Api/update", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pb.BasisApi/update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *apiClient) Delete(ctx context.Context, in *DeleteApiRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+func (c *basisApiClient) Delete(ctx context.Context, in *DeleteApiRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
 	out := new(EmptyResponse)
-	err := c.cc.Invoke(ctx, "/pb.Api/delete", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pb.BasisApi/delete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ApiServer is the server API for Api service.
-type ApiServer interface {
+// BasisApiServer is the server API for BasisApi service.
+type BasisApiServer interface {
 	Create(context.Context, *CreateApiRequest) (*CreateApiResponse, error)
 	Get(context.Context, *GetApiRequest) (*GetApiResponse, error)
 	List(context.Context, *ListApiRequest) (*ListApiResponse, error)
@@ -137,143 +138,143 @@ type ApiServer interface {
 	Delete(context.Context, *DeleteApiRequest) (*EmptyResponse, error)
 }
 
-// UnimplementedApiServer can be embedded to have forward compatible implementations.
-type UnimplementedApiServer struct {
+// UnimplementedBasisApiServer can be embedded to have forward compatible implementations.
+type UnimplementedBasisApiServer struct {
 }
 
-func (*UnimplementedApiServer) Create(ctx context.Context, req *CreateApiRequest) (*CreateApiResponse, error) {
+func (*UnimplementedBasisApiServer) Create(ctx context.Context, req *CreateApiRequest) (*CreateApiResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (*UnimplementedApiServer) Get(ctx context.Context, req *GetApiRequest) (*GetApiResponse, error) {
+func (*UnimplementedBasisApiServer) Get(ctx context.Context, req *GetApiRequest) (*GetApiResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (*UnimplementedApiServer) List(ctx context.Context, req *ListApiRequest) (*ListApiResponse, error) {
+func (*UnimplementedBasisApiServer) List(ctx context.Context, req *ListApiRequest) (*ListApiResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (*UnimplementedApiServer) Update(ctx context.Context, req *UpdateApiRequest) (*EmptyResponse, error) {
+func (*UnimplementedBasisApiServer) Update(ctx context.Context, req *UpdateApiRequest) (*EmptyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (*UnimplementedApiServer) Delete(ctx context.Context, req *DeleteApiRequest) (*EmptyResponse, error) {
+func (*UnimplementedBasisApiServer) Delete(ctx context.Context, req *DeleteApiRequest) (*EmptyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 
-func RegisterApiServer(s *grpc.Server, srv ApiServer) {
-	s.RegisterService(&_Api_serviceDesc, srv)
+func RegisterBasisApiServer(s *grpc.Server, srv BasisApiServer) {
+	s.RegisterService(&_BasisApi_serviceDesc, srv)
 }
 
-func _Api_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BasisApi_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateApiRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).Create(ctx, in)
+		return srv.(BasisApiServer).Create(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.Api/Create",
+		FullMethod: "/pb.BasisApi/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).Create(ctx, req.(*CreateApiRequest))
+		return srv.(BasisApiServer).Create(ctx, req.(*CreateApiRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BasisApi_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetApiRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).Get(ctx, in)
+		return srv.(BasisApiServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.Api/Get",
+		FullMethod: "/pb.BasisApi/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).Get(ctx, req.(*GetApiRequest))
+		return srv.(BasisApiServer).Get(ctx, req.(*GetApiRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BasisApi_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListApiRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).List(ctx, in)
+		return srv.(BasisApiServer).List(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.Api/List",
+		FullMethod: "/pb.BasisApi/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).List(ctx, req.(*ListApiRequest))
+		return srv.(BasisApiServer).List(ctx, req.(*ListApiRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BasisApi_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateApiRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).Update(ctx, in)
+		return srv.(BasisApiServer).Update(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.Api/Update",
+		FullMethod: "/pb.BasisApi/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).Update(ctx, req.(*UpdateApiRequest))
+		return srv.(BasisApiServer).Update(ctx, req.(*UpdateApiRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BasisApi_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteApiRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).Delete(ctx, in)
+		return srv.(BasisApiServer).Delete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.Api/Delete",
+		FullMethod: "/pb.BasisApi/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).Delete(ctx, req.(*DeleteApiRequest))
+		return srv.(BasisApiServer).Delete(ctx, req.(*DeleteApiRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Api_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "pb.Api",
-	HandlerType: (*ApiServer)(nil),
+var _BasisApi_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "pb.BasisApi",
+	HandlerType: (*BasisApiServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "create",
-			Handler:    _Api_Create_Handler,
+			Handler:    _BasisApi_Create_Handler,
 		},
 		{
 			MethodName: "get",
-			Handler:    _Api_Get_Handler,
+			Handler:    _BasisApi_Get_Handler,
 		},
 		{
 			MethodName: "list",
-			Handler:    _Api_List_Handler,
+			Handler:    _BasisApi_List_Handler,
 		},
 		{
 			MethodName: "update",
-			Handler:    _Api_Update_Handler,
+			Handler:    _BasisApi_Update_Handler,
 		},
 		{
 			MethodName: "delete",
-			Handler:    _Api_Delete_Handler,
+			Handler:    _BasisApi_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
