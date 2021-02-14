@@ -8,6 +8,7 @@ package pb
 
 import (
 	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
@@ -72,8 +73,9 @@ func (Api_MethodType) EnumDescriptor() ([]byte, []int) {
 
 // one of
 type BasicAuth struct {
-	User     string `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Type     string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	User     string `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 }
 
 func (m *BasicAuth) Reset()         { *m = BasicAuth{} }
@@ -109,6 +111,13 @@ func (m *BasicAuth) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_BasicAuth proto.InternalMessageInfo
 
+func (m *BasicAuth) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
+}
+
 func (m *BasicAuth) GetUser() string {
 	if m != nil {
 		return m.User
@@ -124,8 +133,7 @@ func (m *BasicAuth) GetPassword() string {
 }
 
 type JwtAuth struct {
-	User     string `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 }
 
 func (m *JwtAuth) Reset()         { *m = JwtAuth{} }
@@ -161,21 +169,15 @@ func (m *JwtAuth) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_JwtAuth proto.InternalMessageInfo
 
-func (m *JwtAuth) GetUser() string {
+func (m *JwtAuth) GetType() string {
 	if m != nil {
-		return m.User
-	}
-	return ""
-}
-
-func (m *JwtAuth) GetPassword() string {
-	if m != nil {
-		return m.Password
+		return m.Type
 	}
 	return ""
 }
 
 type OAuth1 struct {
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 }
 
 func (m *OAuth1) Reset()         { *m = OAuth1{} }
@@ -211,7 +213,15 @@ func (m *OAuth1) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_OAuth1 proto.InternalMessageInfo
 
+func (m *OAuth1) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
+}
+
 type OAuth2 struct {
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 }
 
 func (m *OAuth2) Reset()         { *m = OAuth2{} }
@@ -247,31 +257,38 @@ func (m *OAuth2) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_OAuth2 proto.InternalMessageInfo
 
+func (m *OAuth2) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
+}
+
 type Api struct {
 	Id          string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// 负责人
-	MemberIds []string `protobuf:"bytes,4,rep,name=member_ids,json=memberIds,proto3" json:"member_ids,omitempty"`
+	MemberIds []string `protobuf:"bytes,4,rep,name=member_ids,json=memberIds,proto3" json:"memberIds"`
 	Method    string   `protobuf:"bytes,11,opt,name=method,proto3" json:"method,omitempty"`
 	// 带表达式{xxx}
 	Url        string            `protobuf:"bytes,13,opt,name=url,proto3" json:"url,omitempty"`
 	Headers    map[string]string `protobuf:"bytes,14,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	PathParams map[string]string `protobuf:"bytes,15,rep,name=path_params,json=pathParams,proto3" json:"path_params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	UrlParams  map[string]string `protobuf:"bytes,16,rep,name=url_params,json=urlParams,proto3" json:"url_params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	PathParams map[string]string `protobuf:"bytes,15,rep,name=path_params,json=pathParams,proto3" json:"pathParams" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	UrlParams  map[string]string `protobuf:"bytes,16,rep,name=url_params,json=urlParams,proto3" json:"urlParams" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Types that are valid to be assigned to Auth:
-	//	*Api_BasicAuth
-	//	*Api_JwtAuth
-	//	*Api_Oauth1
-	//	*Api_Oauth2
+	//	*Api_Basic
+	//	*Api_Jwt
+	//	*Api_O1
+	//	*Api_O2
 	Auth    isApi_Auth `protobuf_oneof:"auth"`
 	Body    string     `protobuf:"bytes,21,opt,name=body,proto3" json:"body,omitempty"`
 	Timeout int32      `protobuf:"varint,22,opt,name=timeout,proto3" json:"timeout,omitempty"`
 	// UI 所在目录
 	Directories []string `protobuf:"bytes,30,rep,name=directories,proto3" json:"directories,omitempty"`
 	//
-	CreateTime int64 `protobuf:"varint,41,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	UpdateTime int64 `protobuf:"varint,42,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	CreateTime int64 `protobuf:"varint,41,opt,name=create_time,json=createTime,proto3" json:"createTime"`
+	UpdateTime int64 `protobuf:"varint,42,opt,name=update_time,json=updateTime,proto3" json:"updateTime"`
 }
 
 func (m *Api) Reset()         { *m = Api{} }
@@ -313,23 +330,23 @@ type isApi_Auth interface {
 	Size() int
 }
 
-type Api_BasicAuth struct {
-	BasicAuth *BasicAuth `protobuf:"bytes,17,opt,name=basic_auth,json=basicAuth,proto3,oneof"`
+type Api_Basic struct {
+	Basic *BasicAuth `protobuf:"bytes,17,opt,name=basic,proto3,oneof"`
 }
-type Api_JwtAuth struct {
-	JwtAuth *JwtAuth `protobuf:"bytes,18,opt,name=jwt_auth,json=jwtAuth,proto3,oneof"`
+type Api_Jwt struct {
+	Jwt *JwtAuth `protobuf:"bytes,18,opt,name=jwt,proto3,oneof"`
 }
-type Api_Oauth1 struct {
-	Oauth1 *OAuth1 `protobuf:"bytes,19,opt,name=oauth1,proto3,oneof"`
+type Api_O1 struct {
+	O1 *OAuth1 `protobuf:"bytes,19,opt,name=o1,proto3,oneof"`
 }
-type Api_Oauth2 struct {
-	Oauth2 *OAuth2 `protobuf:"bytes,20,opt,name=oauth2,proto3,oneof"`
+type Api_O2 struct {
+	O2 *OAuth2 `protobuf:"bytes,20,opt,name=o2,proto3,oneof"`
 }
 
-func (*Api_BasicAuth) isApi_Auth() {}
-func (*Api_JwtAuth) isApi_Auth()   {}
-func (*Api_Oauth1) isApi_Auth()    {}
-func (*Api_Oauth2) isApi_Auth()    {}
+func (*Api_Basic) isApi_Auth() {}
+func (*Api_Jwt) isApi_Auth()   {}
+func (*Api_O1) isApi_Auth()    {}
+func (*Api_O2) isApi_Auth()    {}
 
 func (m *Api) GetAuth() isApi_Auth {
 	if m != nil {
@@ -401,30 +418,30 @@ func (m *Api) GetUrlParams() map[string]string {
 	return nil
 }
 
-func (m *Api) GetBasicAuth() *BasicAuth {
-	if x, ok := m.GetAuth().(*Api_BasicAuth); ok {
-		return x.BasicAuth
+func (m *Api) GetBasic() *BasicAuth {
+	if x, ok := m.GetAuth().(*Api_Basic); ok {
+		return x.Basic
 	}
 	return nil
 }
 
-func (m *Api) GetJwtAuth() *JwtAuth {
-	if x, ok := m.GetAuth().(*Api_JwtAuth); ok {
-		return x.JwtAuth
+func (m *Api) GetJwt() *JwtAuth {
+	if x, ok := m.GetAuth().(*Api_Jwt); ok {
+		return x.Jwt
 	}
 	return nil
 }
 
-func (m *Api) GetOauth1() *OAuth1 {
-	if x, ok := m.GetAuth().(*Api_Oauth1); ok {
-		return x.Oauth1
+func (m *Api) GetO1() *OAuth1 {
+	if x, ok := m.GetAuth().(*Api_O1); ok {
+		return x.O1
 	}
 	return nil
 }
 
-func (m *Api) GetOauth2() *OAuth2 {
-	if x, ok := m.GetAuth().(*Api_Oauth2); ok {
-		return x.Oauth2
+func (m *Api) GetO2() *OAuth2 {
+	if x, ok := m.GetAuth().(*Api_O2); ok {
+		return x.O2
 	}
 	return nil
 }
@@ -467,10 +484,10 @@ func (m *Api) GetUpdateTime() int64 {
 // XXX_OneofFuncs is for the internal use of the proto package.
 func (*Api) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
 	return _Api_OneofMarshaler, _Api_OneofUnmarshaler, _Api_OneofSizer, []interface{}{
-		(*Api_BasicAuth)(nil),
-		(*Api_JwtAuth)(nil),
-		(*Api_Oauth1)(nil),
-		(*Api_Oauth2)(nil),
+		(*Api_Basic)(nil),
+		(*Api_Jwt)(nil),
+		(*Api_O1)(nil),
+		(*Api_O2)(nil),
 	}
 }
 
@@ -478,24 +495,24 @@ func _Api_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	m := msg.(*Api)
 	// auth
 	switch x := m.Auth.(type) {
-	case *Api_BasicAuth:
+	case *Api_Basic:
 		_ = b.EncodeVarint(17<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.BasicAuth); err != nil {
+		if err := b.EncodeMessage(x.Basic); err != nil {
 			return err
 		}
-	case *Api_JwtAuth:
+	case *Api_Jwt:
 		_ = b.EncodeVarint(18<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.JwtAuth); err != nil {
+		if err := b.EncodeMessage(x.Jwt); err != nil {
 			return err
 		}
-	case *Api_Oauth1:
+	case *Api_O1:
 		_ = b.EncodeVarint(19<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.Oauth1); err != nil {
+		if err := b.EncodeMessage(x.O1); err != nil {
 			return err
 		}
-	case *Api_Oauth2:
+	case *Api_O2:
 		_ = b.EncodeVarint(20<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.Oauth2); err != nil {
+		if err := b.EncodeMessage(x.O2); err != nil {
 			return err
 		}
 	case nil:
@@ -508,37 +525,37 @@ func _Api_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 func _Api_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
 	m := msg.(*Api)
 	switch tag {
-	case 17: // auth.basic_auth
+	case 17: // auth.basic
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(BasicAuth)
 		err := b.DecodeMessage(msg)
-		m.Auth = &Api_BasicAuth{msg}
+		m.Auth = &Api_Basic{msg}
 		return true, err
-	case 18: // auth.jwt_auth
+	case 18: // auth.jwt
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(JwtAuth)
 		err := b.DecodeMessage(msg)
-		m.Auth = &Api_JwtAuth{msg}
+		m.Auth = &Api_Jwt{msg}
 		return true, err
-	case 19: // auth.oauth1
+	case 19: // auth.o1
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(OAuth1)
 		err := b.DecodeMessage(msg)
-		m.Auth = &Api_Oauth1{msg}
+		m.Auth = &Api_O1{msg}
 		return true, err
-	case 20: // auth.oauth2
+	case 20: // auth.o2
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(OAuth2)
 		err := b.DecodeMessage(msg)
-		m.Auth = &Api_Oauth2{msg}
+		m.Auth = &Api_O2{msg}
 		return true, err
 	default:
 		return false, nil
@@ -549,23 +566,23 @@ func _Api_OneofSizer(msg proto.Message) (n int) {
 	m := msg.(*Api)
 	// auth
 	switch x := m.Auth.(type) {
-	case *Api_BasicAuth:
-		s := proto.Size(x.BasicAuth)
+	case *Api_Basic:
+		s := proto.Size(x.Basic)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *Api_JwtAuth:
-		s := proto.Size(x.JwtAuth)
+	case *Api_Jwt:
+		s := proto.Size(x.Jwt)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *Api_Oauth1:
-		s := proto.Size(x.Oauth1)
+	case *Api_O1:
+		s := proto.Size(x.O1)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *Api_Oauth2:
-		s := proto.Size(x.Oauth2)
+	case *Api_O2:
+		s := proto.Size(x.O2)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
@@ -755,8 +772,8 @@ func (m *GetApiResponse) GetApis() []*Api {
 type ListApiRequest struct {
 	Header      int32    `protobuf:"varint,1,opt,name=header,proto3" json:"header,omitempty"`
 	Names       []string `protobuf:"bytes,5,rep,name=names,proto3" json:"names,omitempty"`
-	CurrentPage int32    `protobuf:"varint,9,opt,name=current_page,json=currentPage,proto3" json:"current_page,omitempty"`
-	PageSize    int32    `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	CurrentPage int32    `protobuf:"varint,9,opt,name=current_page,json=currentPage,proto3" json:"currentPage"`
+	PageSize    int32    `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3" json:"pageSize"`
 }
 
 func (m *ListApiRequest) Reset()         { *m = ListApiRequest{} }
@@ -983,58 +1000,62 @@ func init() {
 func init() { proto.RegisterFile("api_model.proto", fileDescriptor_27a3320a6e8e11d1) }
 
 var fileDescriptor_27a3320a6e8e11d1 = []byte{
-	// 808 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x55, 0x5d, 0x6f, 0x1b, 0x45,
-	0x14, 0xf5, 0xfa, 0x63, 0xd7, 0x7b, 0x37, 0x71, 0xb6, 0x43, 0x08, 0xa3, 0x54, 0x18, 0x77, 0x55,
-	0x24, 0x83, 0x84, 0xab, 0x1a, 0x21, 0x95, 0x02, 0x0f, 0x4e, 0x62, 0xd5, 0x85, 0x42, 0x56, 0x9b,
-	0x0d, 0xaf, 0xd6, 0xd8, 0x3b, 0xaa, 0xa7, 0x78, 0xbd, 0xc3, 0xcc, 0x2c, 0x91, 0xfb, 0xc0, 0x6f,
-	0x80, 0x7f, 0xc5, 0x63, 0x1f, 0x79, 0x44, 0xc9, 0x1f, 0x41, 0x33, 0xfb, 0x51, 0xa7, 0x2d, 0x0f,
-	0xe5, 0xed, 0xde, 0x73, 0xcf, 0xb9, 0xb3, 0x73, 0xcf, 0xf5, 0x18, 0x0e, 0x08, 0x67, 0xf3, 0x34,
-	0x4b, 0xe8, 0x7a, 0xc4, 0x45, 0xa6, 0x32, 0xd4, 0xe4, 0x8b, 0xe3, 0xbd, 0x65, 0x96, 0xa6, 0xd9,
-	0xa6, 0x40, 0x82, 0x6f, 0xc0, 0x3d, 0x21, 0x92, 0x2d, 0x27, 0xb9, 0x5a, 0x21, 0x04, 0xed, 0x5c,
-	0x52, 0x81, 0xad, 0x81, 0x35, 0x74, 0x23, 0x13, 0xa3, 0x63, 0xe8, 0x72, 0x22, 0xe5, 0x55, 0x26,
-	0x12, 0xdc, 0x34, 0x78, 0x9d, 0x07, 0x5f, 0x83, 0xf3, 0xfd, 0x95, 0xfa, 0x5f, 0xd2, 0x2e, 0xd8,
-	0xe7, 0x5a, 0xf8, 0xb0, 0x8e, 0xc6, 0xc1, 0x9f, 0x0e, 0xb4, 0x26, 0x9c, 0xa1, 0x1e, 0x34, 0x59,
-	0x52, 0x76, 0x6a, 0xb2, 0x44, 0xf7, 0xde, 0x90, 0x94, 0x96, 0x3d, 0x4c, 0x8c, 0x06, 0xe0, 0x25,
-	0x54, 0x2e, 0x05, 0xe3, 0x8a, 0x65, 0x1b, 0xdc, 0x32, 0xa5, 0x5d, 0x08, 0x7d, 0x0c, 0x90, 0xd2,
-	0x74, 0x41, 0xc5, 0x9c, 0x25, 0x12, 0xb7, 0x07, 0xad, 0xa1, 0x1b, 0xb9, 0x05, 0xf2, 0x34, 0x91,
-	0xe8, 0x08, 0xec, 0x94, 0xaa, 0x55, 0x96, 0x60, 0xcf, 0x68, 0xcb, 0x0c, 0xf9, 0xd0, 0xca, 0xc5,
-	0x1a, 0xef, 0x1b, 0x50, 0x87, 0x68, 0x04, 0xce, 0x8a, 0x92, 0x84, 0x0a, 0x89, 0x7b, 0x83, 0xd6,
-	0xd0, 0x1b, 0x1f, 0x8e, 0xf8, 0x62, 0x34, 0xe1, 0x6c, 0x34, 0x2b, 0xe0, 0xe9, 0x46, 0x89, 0x6d,
-	0x54, 0x91, 0xd0, 0x23, 0xf0, 0x38, 0x51, 0xab, 0x39, 0x27, 0x82, 0xa4, 0x12, 0x1f, 0x18, 0xcd,
-	0x47, 0x95, 0x26, 0x24, 0x6a, 0x15, 0x9a, 0x4a, 0x21, 0x03, 0x5e, 0x03, 0xe8, 0x2b, 0x80, 0x5c,
-	0xac, 0x2b, 0xa1, 0x6f, 0x84, 0x47, 0x95, 0xf0, 0x52, 0xac, 0x77, 0x75, 0x6e, 0x5e, 0xe5, 0x68,
-	0x04, 0xb0, 0xd0, 0x1e, 0xce, 0x49, 0xae, 0x56, 0xf8, 0xce, 0xc0, 0x1a, 0x7a, 0xe3, 0x7d, 0x2d,
-	0xab, 0x9d, 0x9d, 0x35, 0x22, 0x77, 0x51, 0xdb, 0x3c, 0x84, 0xee, 0x8b, 0x2b, 0x55, 0xb0, 0x91,
-	0x61, 0x7b, 0x9a, 0x5d, 0x5a, 0x39, 0x6b, 0x44, 0xce, 0x8b, 0xd2, 0xd5, 0xfb, 0x60, 0x67, 0x9a,
-	0xf6, 0x10, 0x7f, 0x60, 0x78, 0xa0, 0x79, 0x85, 0x6f, 0xb3, 0x46, 0x54, 0xd6, 0x6a, 0xd6, 0x18,
-	0x1f, 0xbe, 0xc1, 0x1a, 0xd7, 0xac, 0xb1, 0x76, 0x71, 0x91, 0x25, 0x5b, 0xfc, 0x61, 0xe1, 0xa2,
-	0x8e, 0x11, 0x06, 0x47, 0xb1, 0x94, 0x66, 0xb9, 0xc2, 0x47, 0x03, 0x6b, 0xd8, 0x89, 0xaa, 0xd4,
-	0xf8, 0xcb, 0x04, 0x5d, 0xaa, 0x4c, 0x30, 0x2a, 0x71, 0xdf, 0xd8, 0xb7, 0x0b, 0xa1, 0x4f, 0xc0,
-	0x5b, 0x0a, 0x4a, 0x14, 0x9d, 0x6b, 0x0d, 0xfe, 0x6c, 0x60, 0x0d, 0x5b, 0x11, 0x14, 0x50, 0xcc,
-	0x52, 0xaa, 0x09, 0x39, 0x4f, 0x6a, 0xc2, 0xe7, 0x05, 0xa1, 0x80, 0x34, 0xe1, 0xf8, 0x31, 0xec,
-	0xed, 0x3a, 0xa8, 0xad, 0xff, 0x85, 0x6e, 0xcb, 0xc5, 0xd3, 0x21, 0x3a, 0x84, 0xce, 0x6f, 0x64,
-	0x9d, 0x57, 0xab, 0x57, 0x24, 0x8f, 0x9b, 0x8f, 0xac, 0xe3, 0xef, 0xe0, 0xe0, 0x0d, 0x27, 0xdf,
-	0x4b, 0xfe, 0x2d, 0xf4, 0x6e, 0xfb, 0xf9, 0x3e, 0xea, 0x80, 0x00, 0xfc, 0x68, 0xb6, 0x35, 0xde,
-	0x72, 0x8a, 0x1c, 0x68, 0x3d, 0x99, 0xc6, 0x7e, 0x03, 0x75, 0xa1, 0x3d, 0x9b, 0x4e, 0xce, 0x7c,
-	0x4b, 0x47, 0xe1, 0xf9, 0x45, 0xec, 0x37, 0x75, 0x31, 0xbc, 0x8c, 0xfd, 0x16, 0x72, 0xa1, 0x13,
-	0x4e, 0xe2, 0xd3, 0x99, 0xdf, 0x46, 0x00, 0xf6, 0xd9, 0xf4, 0xd9, 0x34, 0x9e, 0xfa, 0x1d, 0x0d,
-	0xc7, 0xd1, 0xe4, 0x74, 0xea, 0xdb, 0xc8, 0x03, 0xe7, 0x3c, 0x8c, 0x9f, 0x9e, 0xff, 0x74, 0xe1,
-	0x3b, 0x27, 0x36, 0xb4, 0xb5, 0x6d, 0xc1, 0x03, 0xf0, 0x4f, 0xcd, 0x48, 0x27, 0x9c, 0x45, 0xf4,
-	0xd7, 0x9c, 0x4a, 0x85, 0xee, 0x42, 0x9b, 0x70, 0x26, 0xb1, 0x65, 0x16, 0xd4, 0x29, 0x17, 0x34,
-	0x32, 0x60, 0xf0, 0x29, 0xdc, 0xd9, 0x11, 0x48, 0x9e, 0x6d, 0x24, 0xd5, 0x97, 0xd3, 0x3f, 0x42,
-	0xcb, 0xb8, 0xa8, 0xc3, 0xe0, 0x1e, 0xec, 0x3f, 0xa1, 0x6a, 0xa7, 0xe9, 0xdb, 0x94, 0x2f, 0xa0,
-	0x57, 0x51, 0xca, 0x36, 0x77, 0xa1, 0x3d, 0x79, 0xd7, 0xc1, 0x1a, 0x0c, 0x7e, 0x87, 0xde, 0x33,
-	0x26, 0x77, 0x5b, 0x1e, 0x81, 0x5d, 0xfc, 0x26, 0xcd, 0x54, 0x3b, 0x51, 0x99, 0xe9, 0xc1, 0xea,
-	0x37, 0x44, 0xe2, 0x8e, 0x39, 0xac, 0x48, 0xd0, 0x3d, 0xd8, 0x5b, 0xe6, 0x42, 0xd0, 0x8d, 0x9a,
-	0x73, 0xf2, 0x9c, 0x62, 0xd7, 0x68, 0xbc, 0x12, 0x0b, 0xc9, 0x73, 0x7d, 0xbe, 0xab, 0x4b, 0x73,
-	0xc9, 0x5e, 0x52, 0x0c, 0xa6, 0xde, 0xd5, 0xc0, 0x05, 0x7b, 0x49, 0x83, 0x10, 0x0e, 0xea, 0xf3,
-	0xcb, 0xef, 0x1d, 0xbc, 0x7e, 0x39, 0x8a, 0x4f, 0xb6, 0xf5, 0x27, 0xff, 0xf0, 0xf3, 0xeb, 0xb7,
-	0xa2, 0xba, 0x51, 0xf3, 0x5d, 0x37, 0x7a, 0x00, 0xfe, 0xa5, 0xd9, 0xd6, 0xdb, 0xb3, 0xff, 0xef,
-	0x11, 0xdc, 0x07, 0xff, 0x8c, 0xae, 0xe9, 0x2d, 0xc1, 0x5b, 0x73, 0x3d, 0xc1, 0x7f, 0x5d, 0xf7,
-	0xad, 0x57, 0xd7, 0x7d, 0xeb, 0x9f, 0xeb, 0xbe, 0xf5, 0xc7, 0x4d, 0xbf, 0xf1, 0xea, 0xa6, 0xdf,
-	0xf8, 0xfb, 0xa6, 0xdf, 0x58, 0xd8, 0xe6, 0x3f, 0xe1, 0xcb, 0x7f, 0x03, 0x00, 0x00, 0xff, 0xff,
-	0xac, 0xd6, 0x01, 0xb4, 0x38, 0x06, 0x00, 0x00,
+	// 877 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x55, 0x4d, 0x6f, 0xe3, 0x44,
+	0x18, 0x8e, 0xed, 0x7c, 0x34, 0xaf, 0xdb, 0xc4, 0x3b, 0x94, 0x32, 0xca, 0x2e, 0x49, 0xb0, 0x58,
+	0x29, 0x8b, 0xd8, 0x44, 0x0d, 0x17, 0xb4, 0x82, 0x43, 0xd2, 0x46, 0x9b, 0x85, 0x85, 0x44, 0xae,
+	0xcb, 0x35, 0x72, 0xe2, 0x21, 0x19, 0x88, 0xe3, 0xc1, 0x33, 0xa6, 0xea, 0xfe, 0x0a, 0xfe, 0x00,
+	0x3f, 0x85, 0x3b, 0xc7, 0x3d, 0x72, 0xaa, 0x50, 0x7b, 0xeb, 0xaf, 0x40, 0x33, 0xb6, 0x13, 0x77,
+	0xb7, 0x8b, 0xd4, 0xdb, 0xf3, 0x3e, 0xcf, 0xfb, 0xbc, 0xf1, 0xfb, 0x61, 0x07, 0xea, 0x1e, 0xa3,
+	0xb3, 0x20, 0xf4, 0xc9, 0xba, 0xcb, 0xa2, 0x50, 0x84, 0x48, 0x67, 0xf3, 0xc6, 0xfe, 0x22, 0x0c,
+	0x82, 0x70, 0x93, 0x30, 0x8d, 0xe7, 0x4b, 0x2a, 0x56, 0xf1, 0xbc, 0xbb, 0x08, 0x83, 0xde, 0x32,
+	0x5c, 0x86, 0x3d, 0x45, 0xcf, 0xe3, 0x9f, 0x55, 0xa4, 0x02, 0x85, 0x92, 0x74, 0x7b, 0x02, 0xd5,
+	0xa1, 0xc7, 0xe9, 0x62, 0x10, 0x8b, 0x15, 0x42, 0x50, 0x14, 0x97, 0x8c, 0x60, 0xad, 0xad, 0x75,
+	0xaa, 0x8e, 0xc2, 0x92, 0x8b, 0x39, 0x89, 0xb0, 0x9e, 0x70, 0x12, 0xa3, 0x06, 0xec, 0x31, 0x8f,
+	0xf3, 0x8b, 0x30, 0xf2, 0xb1, 0xa1, 0xf8, 0x6d, 0x6c, 0x7f, 0x0a, 0x95, 0xef, 0x2e, 0xc4, 0x87,
+	0xca, 0xd9, 0x4f, 0xa0, 0x3c, 0x91, 0xe2, 0xf1, 0xff, 0xaa, 0xfd, 0x7b, 0xd5, 0xbf, 0x2a, 0x60,
+	0x0c, 0x18, 0x45, 0x35, 0xd0, 0xa9, 0x9f, 0x2a, 0x3a, 0xf5, 0x65, 0xee, 0xc6, 0x0b, 0x48, 0xf6,
+	0x88, 0x12, 0xa3, 0x36, 0x98, 0x3e, 0xe1, 0x8b, 0x88, 0x32, 0x41, 0xc3, 0x4d, 0xfa, 0x94, 0x79,
+	0x0a, 0x7d, 0x09, 0x10, 0x90, 0x60, 0x4e, 0xa2, 0x19, 0xf5, 0x39, 0x2e, 0xb6, 0x8d, 0x4e, 0x75,
+	0x78, 0x70, 0x7b, 0xd5, 0xaa, 0x26, 0xec, 0x2b, 0x9f, 0x3b, 0x3b, 0x88, 0x8e, 0xa0, 0x1c, 0x10,
+	0xb1, 0x0a, 0x7d, 0x6c, 0xaa, 0x52, 0x69, 0x84, 0x2c, 0x30, 0xe2, 0x68, 0x8d, 0x0f, 0x14, 0x29,
+	0x21, 0xea, 0x42, 0x65, 0x45, 0x3c, 0x9f, 0x44, 0x1c, 0xd7, 0xda, 0x46, 0xc7, 0xec, 0x1f, 0x76,
+	0xd9, 0xbc, 0x3b, 0x60, 0xb4, 0x3b, 0x4e, 0xe8, 0xd1, 0x46, 0x44, 0x97, 0x4e, 0x96, 0x84, 0xc6,
+	0x60, 0x32, 0x4f, 0xac, 0x66, 0xcc, 0x8b, 0xbc, 0x80, 0xe3, 0xba, 0xf2, 0x7c, 0x92, 0x79, 0xa6,
+	0x9e, 0x58, 0x4d, 0x95, 0xa2, 0x6c, 0xc3, 0xda, 0xed, 0x55, 0x0b, 0xd8, 0x96, 0x74, 0x72, 0x18,
+	0x9d, 0x02, 0xc4, 0xd1, 0x3a, 0x2b, 0x64, 0xa9, 0x42, 0x47, 0x59, 0xa1, 0xf3, 0x68, 0x9d, 0xaf,
+	0xa3, 0x3a, 0x8d, 0x33, 0xce, 0xd9, 0x41, 0xf4, 0x14, 0x4a, 0x73, 0x79, 0x11, 0xf8, 0x51, 0x5b,
+	0xeb, 0x98, 0xfd, 0x03, 0x59, 0x60, 0x7b, 0x22, 0xe3, 0x82, 0x93, 0xa8, 0xa8, 0x05, 0xc6, 0x2f,
+	0x17, 0x02, 0x23, 0x95, 0x64, 0xca, 0xa4, 0x74, 0xed, 0xe3, 0x82, 0x23, 0x15, 0xf4, 0x04, 0xf4,
+	0xf0, 0x18, 0x7f, 0xa4, 0x74, 0x90, 0x7a, 0xb2, 0xf7, 0x71, 0xc1, 0xd1, 0xc3, 0x63, 0xa5, 0xf6,
+	0xf1, 0xe1, 0x3b, 0x6a, 0x5f, 0xa9, 0x6a, 0xfb, 0xf3, 0xd0, 0xbf, 0xc4, 0x1f, 0x27, 0x1b, 0x95,
+	0x18, 0x61, 0xa8, 0x08, 0x1a, 0x90, 0x30, 0x16, 0xf8, 0xa8, 0xad, 0x75, 0x4a, 0x4e, 0x16, 0xaa,
+	0x5d, 0xd3, 0x88, 0x2c, 0x44, 0x18, 0x51, 0xc2, 0x71, 0x53, 0xae, 0xd2, 0xc9, 0x53, 0xa8, 0x07,
+	0xe6, 0x22, 0x22, 0x9e, 0x20, 0x33, 0xe9, 0xc1, 0xcf, 0xda, 0x5a, 0xc7, 0x48, 0x46, 0x99, 0xd0,
+	0x2e, 0x0d, 0x88, 0x93, 0xc3, 0xd2, 0x10, 0x33, 0x7f, 0x6b, 0xf8, 0x62, 0x67, 0x48, 0xe8, 0xc4,
+	0xb0, 0xc3, 0x8d, 0x17, 0xb0, 0x9f, 0x5f, 0xaf, 0xbc, 0x8b, 0x5f, 0xc9, 0x65, 0x7a, 0xa4, 0x12,
+	0xa2, 0x43, 0x28, 0xfd, 0xee, 0xad, 0xe3, 0xec, 0x4c, 0x93, 0xe0, 0x85, 0xfe, 0xb5, 0xd6, 0xf8,
+	0x16, 0xea, 0xef, 0xac, 0xf9, 0x41, 0xf6, 0x6f, 0xa0, 0x76, 0x77, 0xb9, 0x0f, 0x71, 0xdb, 0x1e,
+	0xc0, 0x0f, 0xea, 0x94, 0x5d, 0xf9, 0xb6, 0x57, 0xc0, 0x78, 0x39, 0x72, 0xad, 0x02, 0xda, 0x83,
+	0xe2, 0x78, 0x34, 0x38, 0xb5, 0x34, 0x89, 0xa6, 0x93, 0x33, 0xd7, 0xd2, 0xa5, 0x38, 0x3d, 0x77,
+	0x2d, 0x03, 0x55, 0xa1, 0x34, 0x1d, 0xb8, 0x27, 0x63, 0xab, 0x88, 0x00, 0xca, 0xa7, 0xa3, 0xd7,
+	0x23, 0x77, 0x64, 0x95, 0x24, 0xed, 0x3a, 0x83, 0x93, 0x91, 0x55, 0x46, 0x26, 0x54, 0x26, 0x53,
+	0xf7, 0xd5, 0xe4, 0xc7, 0x33, 0xab, 0x32, 0x2c, 0x43, 0xd1, 0x8b, 0xc5, 0xca, 0xee, 0x81, 0x75,
+	0xa2, 0x46, 0x3c, 0x60, 0xd4, 0x21, 0xbf, 0xc5, 0x84, 0x0b, 0xf4, 0x18, 0x8a, 0x1e, 0xa3, 0x1c,
+	0x6b, 0xea, 0x5a, 0x2b, 0xe9, 0xb5, 0x3a, 0x8a, 0xb4, 0x9f, 0xc2, 0xa3, 0x9c, 0x81, 0xb3, 0x70,
+	0xc3, 0x89, 0x6c, 0x4e, 0xbe, 0xb0, 0x9a, 0xda, 0xb2, 0x84, 0xf6, 0x67, 0x70, 0xf0, 0x92, 0x88,
+	0x5c, 0xd1, 0xf7, 0x53, 0x9e, 0x43, 0x2d, 0x4b, 0x49, 0xcb, 0x3c, 0x86, 0xe2, 0xe0, 0xbe, 0x1f,
+	0x96, 0xa4, 0xfd, 0xa7, 0x06, 0xb5, 0xd7, 0x94, 0xe7, 0x6b, 0x1e, 0x41, 0x39, 0x79, 0x63, 0xd5,
+	0x58, 0x4b, 0x4e, 0x1a, 0xc9, 0xc9, 0xca, 0x0f, 0x0e, 0xc7, 0x25, 0xf5, 0x6b, 0x49, 0x80, 0xfa,
+	0xb0, 0xbf, 0x88, 0xa3, 0x88, 0x6c, 0xc4, 0x8c, 0x79, 0x4b, 0x82, 0xab, 0xd2, 0x33, 0xac, 0xdf,
+	0x5e, 0xb5, 0xcc, 0x94, 0x9f, 0x7a, 0x4b, 0xe2, 0xe4, 0x03, 0xf4, 0x0c, 0xaa, 0x32, 0x77, 0xc6,
+	0xe9, 0x1b, 0x82, 0x41, 0x19, 0xf6, 0x6f, 0xaf, 0x5a, 0x7b, 0x92, 0x3c, 0xa3, 0x6f, 0x88, 0xb3,
+	0x45, 0xf6, 0x14, 0xea, 0xdb, 0xc7, 0x4b, 0xfb, 0x69, 0xef, 0x3e, 0x3b, 0x49, 0x4b, 0x65, 0xd9,
+	0xd2, 0xf7, 0x3f, 0xed, 0x3e, 0x34, 0x59, 0xc7, 0xfa, 0x7d, 0x1d, 0xf7, 0xc0, 0x3a, 0x57, 0xd7,
+	0x7c, 0x77, 0x37, 0x1f, 0x1e, 0xd1, 0xe7, 0x60, 0x9d, 0x92, 0x35, 0xb9, 0x63, 0x78, 0x6f, 0xee,
+	0x43, 0xfc, 0xf7, 0x75, 0x53, 0x7b, 0x7b, 0xdd, 0xd4, 0xfe, 0xbd, 0x6e, 0x6a, 0x7f, 0xdc, 0x34,
+	0x0b, 0x6f, 0x6f, 0x9a, 0x85, 0x7f, 0x6e, 0x9a, 0x85, 0x79, 0x59, 0xfd, 0xff, 0x7c, 0xf5, 0x5f,
+	0x00, 0x00, 0x00, 0xff, 0xff, 0x19, 0x91, 0x0b, 0x6f, 0xd3, 0x06, 0x00, 0x00,
 }
 
 func (m *BasicAuth) Marshal() (dAtA []byte, err error) {
@@ -1052,14 +1073,20 @@ func (m *BasicAuth) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.User) > 0 {
+	if len(m.Type) > 0 {
 		dAtA[i] = 0xa
+		i++
+		i = encodeVarintApiModel(dAtA, i, uint64(len(m.Type)))
+		i += copy(dAtA[i:], m.Type)
+	}
+	if len(m.User) > 0 {
+		dAtA[i] = 0x12
 		i++
 		i = encodeVarintApiModel(dAtA, i, uint64(len(m.User)))
 		i += copy(dAtA[i:], m.User)
 	}
 	if len(m.Password) > 0 {
-		dAtA[i] = 0x12
+		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintApiModel(dAtA, i, uint64(len(m.Password)))
 		i += copy(dAtA[i:], m.Password)
@@ -1082,17 +1109,11 @@ func (m *JwtAuth) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.User) > 0 {
+	if len(m.Type) > 0 {
 		dAtA[i] = 0xa
 		i++
-		i = encodeVarintApiModel(dAtA, i, uint64(len(m.User)))
-		i += copy(dAtA[i:], m.User)
-	}
-	if len(m.Password) > 0 {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintApiModel(dAtA, i, uint64(len(m.Password)))
-		i += copy(dAtA[i:], m.Password)
+		i = encodeVarintApiModel(dAtA, i, uint64(len(m.Type)))
+		i += copy(dAtA[i:], m.Type)
 	}
 	return i, nil
 }
@@ -1112,6 +1133,12 @@ func (m *OAuth1) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.Type) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintApiModel(dAtA, i, uint64(len(m.Type)))
+		i += copy(dAtA[i:], m.Type)
+	}
 	return i, nil
 }
 
@@ -1130,6 +1157,12 @@ func (m *OAuth2) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.Type) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintApiModel(dAtA, i, uint64(len(m.Type)))
+		i += copy(dAtA[i:], m.Type)
+	}
 	return i, nil
 }
 
@@ -1302,15 +1335,15 @@ func (m *Api) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
-func (m *Api_BasicAuth) MarshalTo(dAtA []byte) (int, error) {
+func (m *Api_Basic) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	if m.BasicAuth != nil {
+	if m.Basic != nil {
 		dAtA[i] = 0x8a
 		i++
 		dAtA[i] = 0x1
 		i++
-		i = encodeVarintApiModel(dAtA, i, uint64(m.BasicAuth.Size()))
-		n2, err2 := m.BasicAuth.MarshalTo(dAtA[i:])
+		i = encodeVarintApiModel(dAtA, i, uint64(m.Basic.Size()))
+		n2, err2 := m.Basic.MarshalTo(dAtA[i:])
 		if err2 != nil {
 			return 0, err2
 		}
@@ -1318,15 +1351,15 @@ func (m *Api_BasicAuth) MarshalTo(dAtA []byte) (int, error) {
 	}
 	return i, nil
 }
-func (m *Api_JwtAuth) MarshalTo(dAtA []byte) (int, error) {
+func (m *Api_Jwt) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	if m.JwtAuth != nil {
+	if m.Jwt != nil {
 		dAtA[i] = 0x92
 		i++
 		dAtA[i] = 0x1
 		i++
-		i = encodeVarintApiModel(dAtA, i, uint64(m.JwtAuth.Size()))
-		n3, err3 := m.JwtAuth.MarshalTo(dAtA[i:])
+		i = encodeVarintApiModel(dAtA, i, uint64(m.Jwt.Size()))
+		n3, err3 := m.Jwt.MarshalTo(dAtA[i:])
 		if err3 != nil {
 			return 0, err3
 		}
@@ -1334,15 +1367,15 @@ func (m *Api_JwtAuth) MarshalTo(dAtA []byte) (int, error) {
 	}
 	return i, nil
 }
-func (m *Api_Oauth1) MarshalTo(dAtA []byte) (int, error) {
+func (m *Api_O1) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	if m.Oauth1 != nil {
+	if m.O1 != nil {
 		dAtA[i] = 0x9a
 		i++
 		dAtA[i] = 0x1
 		i++
-		i = encodeVarintApiModel(dAtA, i, uint64(m.Oauth1.Size()))
-		n4, err4 := m.Oauth1.MarshalTo(dAtA[i:])
+		i = encodeVarintApiModel(dAtA, i, uint64(m.O1.Size()))
+		n4, err4 := m.O1.MarshalTo(dAtA[i:])
 		if err4 != nil {
 			return 0, err4
 		}
@@ -1350,15 +1383,15 @@ func (m *Api_Oauth1) MarshalTo(dAtA []byte) (int, error) {
 	}
 	return i, nil
 }
-func (m *Api_Oauth2) MarshalTo(dAtA []byte) (int, error) {
+func (m *Api_O2) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
-	if m.Oauth2 != nil {
+	if m.O2 != nil {
 		dAtA[i] = 0xa2
 		i++
 		dAtA[i] = 0x1
 		i++
-		i = encodeVarintApiModel(dAtA, i, uint64(m.Oauth2.Size()))
-		n5, err5 := m.Oauth2.MarshalTo(dAtA[i:])
+		i = encodeVarintApiModel(dAtA, i, uint64(m.O2.Size()))
+		n5, err5 := m.O2.MarshalTo(dAtA[i:])
 		if err5 != nil {
 			return 0, err5
 		}
@@ -1660,6 +1693,10 @@ func (m *BasicAuth) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.Type)
+	if l > 0 {
+		n += 1 + l + sovApiModel(uint64(l))
+	}
 	l = len(m.User)
 	if l > 0 {
 		n += 1 + l + sovApiModel(uint64(l))
@@ -1677,11 +1714,7 @@ func (m *JwtAuth) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.User)
-	if l > 0 {
-		n += 1 + l + sovApiModel(uint64(l))
-	}
-	l = len(m.Password)
+	l = len(m.Type)
 	if l > 0 {
 		n += 1 + l + sovApiModel(uint64(l))
 	}
@@ -1694,6 +1727,10 @@ func (m *OAuth1) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.Type)
+	if l > 0 {
+		n += 1 + l + sovApiModel(uint64(l))
+	}
 	return n
 }
 
@@ -1703,6 +1740,10 @@ func (m *OAuth2) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.Type)
+	if l > 0 {
+		n += 1 + l + sovApiModel(uint64(l))
+	}
 	return n
 }
 
@@ -1787,50 +1828,50 @@ func (m *Api) Size() (n int) {
 	return n
 }
 
-func (m *Api_BasicAuth) Size() (n int) {
+func (m *Api_Basic) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.BasicAuth != nil {
-		l = m.BasicAuth.Size()
+	if m.Basic != nil {
+		l = m.Basic.Size()
 		n += 2 + l + sovApiModel(uint64(l))
 	}
 	return n
 }
-func (m *Api_JwtAuth) Size() (n int) {
+func (m *Api_Jwt) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.JwtAuth != nil {
-		l = m.JwtAuth.Size()
+	if m.Jwt != nil {
+		l = m.Jwt.Size()
 		n += 2 + l + sovApiModel(uint64(l))
 	}
 	return n
 }
-func (m *Api_Oauth1) Size() (n int) {
+func (m *Api_O1) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.Oauth1 != nil {
-		l = m.Oauth1.Size()
+	if m.O1 != nil {
+		l = m.O1.Size()
 		n += 2 + l + sovApiModel(uint64(l))
 	}
 	return n
 }
-func (m *Api_Oauth2) Size() (n int) {
+func (m *Api_O2) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.Oauth2 != nil {
-		l = m.Oauth2.Size()
+	if m.O2 != nil {
+		l = m.O2.Size()
 		n += 2 + l + sovApiModel(uint64(l))
 	}
 	return n
@@ -2007,6 +2048,38 @@ func (m *BasicAuth) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApiModel
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthApiModel
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthApiModel
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Type = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field User", wireType)
 			}
 			var stringLen uint64
@@ -2037,7 +2110,7 @@ func (m *BasicAuth) Unmarshal(dAtA []byte) error {
 			}
 			m.User = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 2:
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Password", wireType)
 			}
@@ -2124,7 +2197,7 @@ func (m *JwtAuth) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field User", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -2152,39 +2225,7 @@ func (m *JwtAuth) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.User = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Password", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowApiModel
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthApiModel
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthApiModel
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Password = string(dAtA[iNdEx:postIndex])
+			m.Type = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -2239,6 +2280,38 @@ func (m *OAuth1) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: OAuth1: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApiModel
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthApiModel
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthApiModel
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Type = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipApiModel(dAtA[iNdEx:])
@@ -2292,6 +2365,38 @@ func (m *OAuth2) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: OAuth2: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApiModel
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthApiModel
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthApiModel
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Type = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipApiModel(dAtA[iNdEx:])
@@ -2920,7 +3025,7 @@ func (m *Api) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 17:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field BasicAuth", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Basic", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -2951,11 +3056,11 @@ func (m *Api) Unmarshal(dAtA []byte) error {
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Auth = &Api_BasicAuth{v}
+			m.Auth = &Api_Basic{v}
 			iNdEx = postIndex
 		case 18:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field JwtAuth", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Jwt", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -2986,11 +3091,11 @@ func (m *Api) Unmarshal(dAtA []byte) error {
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Auth = &Api_JwtAuth{v}
+			m.Auth = &Api_Jwt{v}
 			iNdEx = postIndex
 		case 19:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Oauth1", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field O1", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3021,11 +3126,11 @@ func (m *Api) Unmarshal(dAtA []byte) error {
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Auth = &Api_Oauth1{v}
+			m.Auth = &Api_O1{v}
 			iNdEx = postIndex
 		case 20:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Oauth2", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field O2", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3056,7 +3161,7 @@ func (m *Api) Unmarshal(dAtA []byte) error {
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Auth = &Api_Oauth2{v}
+			m.Auth = &Api_O2{v}
 			iNdEx = postIndex
 		case 21:
 			if wireType != 2 {

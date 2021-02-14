@@ -7,43 +7,15 @@ import (
 	"github.com/lib/pq"
 	"github.com/linger1216/go-utils/db/postgres"
 	"github.com/linger1216/go-utils/snowflake"
-	pb "github.com/linger1216/jelly-doc/src/server/pb"
+	"github.com/linger1216/jelly-doc/src/server/pb"
 	"strings"
 	"time"
 )
 
-/*
-type Api struct {
-	Id          string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// 负责人
-	MemberId string `protobuf:"bytes,4,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Method   string `protobuf:"bytes,11,opt,name=method,proto3" json:"method,omitempty"`
-	// 带表达式{xxx}
-	Url        string            `protobuf:"bytes,13,opt,name=url,proto3" json:"url,omitempty"`
-	Headers    map[string]string `protobuf:"bytes,14,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	PathParams map[string]string `protobuf:"bytes,15,rep,name=path_params,json=pathParams,proto3" json:"path_params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	UrlParams  map[string]string `protobuf:"bytes,16,rep,name=url_params,json=urlParams,proto3" json:"url_params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Types that are valid to be assigned to Auth:
-	//	*Api_BasicAuth
-	//	*Api_JwtAuth
-	//	*Api_Oauth1
-	//	*Api_Oauth2
-	Auth    isApi_Auth `protobuf_oneof:"auth"`
-	Body    string     `protobuf:"bytes,21,opt,name=body,proto3" json:"body,omitempty"`
-	Timeout int32      `protobuf:"varint,22,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	// UI 所在目录
-	Directories []string `protobuf:"bytes,30,rep,name=directories,proto3" json:"directories,omitempty"`
-	CreateTime int64 `protobuf:"varint,41,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	UpdateTime int64 `protobuf:"varint,42,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
-}
-*/
-
-func NewApiDDL() *BasisApiDDL {
+func NewBasisApiDDL() *BasisApiDDL {
 	ret := &BasisApiDDL{Name: "api"}
 	ret.columns = append(ret.columns, &MetaColumn{Name: "id", Type: "character varying", Primary: true})
-	ret.columns = append(ret.columns, &MetaColumn{Name: "name", Type: "character varying"})
+	ret.columns = append(ret.columns, &MetaColumn{Name: "name", Type: "character varying", Index: true})
 	ret.columns = append(ret.columns, &MetaColumn{Name: "description", Type: "character varying"})
 	ret.columns = append(ret.columns, &MetaColumn{Name: "member_ids", Type: "character varying[]"})
 
@@ -68,7 +40,7 @@ func (m *BasisApiDDL) Upsert(apis ...*pb.Api) (string, []interface{}) {
 	size := len(apis)
 	values := make([]string, 0, size)
 	args := make([]interface{}, 0, size*len(cols))
-	for _, v := range apis {
+	for i, v := range apis {
 		if len(v.Id) == 0 {
 			v.Id = snowflake.Generate()
 		}
@@ -116,6 +88,7 @@ func (m *BasisApiDDL) Upsert(apis ...*pb.Api) (string, []interface{}) {
 			}
 		}
 
+		values = append(values, postgres.ValuesPlaceHolder(i*len(cols), len(cols)))
 		args = append(args, v.Id, v.Name, v.Description, pq.Array(v.MemberIds),
 			v.Method, v.Url, headers, pathParams, urlParams, auth, v.Body, v.Timeout, pq.Array(v.Directories),
 			createTime, updateTime)

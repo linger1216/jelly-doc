@@ -9,22 +9,27 @@ syntax = "proto3";
 package pb;
 
 import "common.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 // 环境变量设计
 
 // one of
 message BasicAuth {
-  string user = 1;
-  string password = 2;
+  string type = 1;
+  string user = 2;
+  string password = 3;
 }
 
 message JwtAuth {
-  string user = 1;
-  string password = 2;
+  string type = 1;
 }
 
-message OAuth1 {}
-message OAuth2 {}
+message OAuth1 {
+  string type = 1;
+}
+message OAuth2 {
+  string type = 1;
+}
 
 message Api {
   string id = 1;
@@ -32,7 +37,7 @@ message Api {
   string description = 3;
 
   // 负责人
-  repeated string member_ids = 4;
+  repeated string member_ids = 4 [json_name="memberIds", (gogoproto.jsontag) = "memberIds"];
 
   // content
   // get, post
@@ -53,13 +58,13 @@ message Api {
   // 带表达式{xxx}
   string url = 13;
   map<string, string> headers = 14;
-  map<string, string> path_params = 15;
-  map<string, string> url_params = 16;
+  map<string, string> path_params = 15 [json_name="pathParams", (gogoproto.jsontag) = "pathParams"];
+  map<string, string> url_params = 16 [json_name="urlParams", (gogoproto.jsontag) = "urlParams"];
   oneof auth {
-    BasicAuth basic_auth = 17;
-    JwtAuth jwt_auth = 18;
-    OAuth1 oauth1 = 19;
-    OAuth2 oauth2 = 20;
+    BasicAuth basic = 17;
+    JwtAuth jwt = 18;
+    OAuth1 o1 = 19;
+    OAuth2 o2 = 20;
   }
   string body = 21;
   int32 timeout = 22;
@@ -68,8 +73,8 @@ message Api {
   repeated string directories = 30;
 
   //
-  int64 create_time = 41;
-  int64 update_time = 42;
+  int64 create_time = 41 [json_name="createTime", (gogoproto.jsontag) = "createTime"];
+  int64 update_time = 42 [json_name="updateTime", (gogoproto.jsontag) = "updateTime"];
 }
 
 message CreateApiRequest {
@@ -91,8 +96,8 @@ message GetApiResponse {
 message ListApiRequest {
   int32 header = 1;
   repeated string names = 5;
-  int32 current_page = 9;
-  int32 page_size = 10;
+  int32 current_page = 9 [json_name="currentPage", (gogoproto.jsontag) = "currentPage"];
+  int32 page_size = 10 [json_name="pageSize", (gogoproto.jsontag) = "pageSize"];
 }
 
 message ListApiResponse {

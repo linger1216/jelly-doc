@@ -1,0 +1,9 @@
+server:
+  debugAddr: ":12000"
+  httpAddr: ":12001"
+  grpcAddr: ":12002"
+
+postgres:
+  uri: postgres://lid:@localhost:5432/lid?sslmode=disable
+  maxIdle: 10
+  maxOpen: 100
